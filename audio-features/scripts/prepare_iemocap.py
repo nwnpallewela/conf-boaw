@@ -137,15 +137,7 @@ for fn in os.listdir(folder_audio_emodb):
 
     sox_call = "sox " + temp_file_name + " -b 16 " + outfilename
     os.system(sox_call)
-    # if label == 'h':
-    #     fn1 = fn.replace('.wav','_1.wav')
-    #     if int(fn[3:5]) < 5:  # training partition
-    #         outfilename1 = folder_audio_train + fn1
-    #         with open(labelsfilename_train, 'a') as fl:
-    #             fl.write(instancename + "_1" + ';' + label + '\n')
-    #
-    #         sox_call = "sox " + infilename + " -b 16 " + outfilename1
-    #         os.system(sox_call)
+
 
 
 print("happy : " + str(happy))

@@ -6,15 +6,15 @@ import os
 
 # Audio folders
 # Folder containing the audio files of the test partition
-folder_audio_train = "audio-features/data/iemo_trainx/"  # The audio files in the training partition converted to 16 bits are stored here
-folder_audio_test = "audio-features/data/iemo_testx/"
+folder_audio_train = "../data/iemo_trainx/"  # The audio files in the training partition converted to 16 bits are stored here
+folder_audio_test = "../data/iemo_testx/"
 # openSMILE
-exe_opensmile = "audio-features\\opensmile-3.0.2-windows-x86_64\\bin\\SMILExtract"  # MODIFY this path to the SMILExtract (version 2.3) executable
-path_config = "audio-features\\opensmile-3.0.2-windows-x86_64\\config\\compare16\\ComParE_2016.conf"  # MODIFY this path to the config file of openSMILE 2.3 - under Windows (cygwin): no POSIX
+exe_opensmile = "..\\opensmile-3.0.2-windows-x86_64\\bin\\SMILExtract"  # MODIFY this path to the SMILExtract (version 2.3) executable
+path_config = "..\\opensmile-3.0.2-windows-x86_64\\config\\compare16\\ComParE_2016.conf"  # MODIFY this path to the config file of openSMILE 2.3 - under Windows (cygwin): no POSIX
 
 # Output files
-outfilename_train = "audio-features/output/iemo_75x_audio_llds_train.csv"
-outfilename_test = "audio-features/output/iemo_75x_audio_llds_test.csv"
+outfilename_train = "..\\output\\iemo_75_audio_llds_train.csv"
+outfilename_test = "..\\output\\iemo_75_audio_llds_test.csv"
 
 # Clear LLD files
 # if os.path.exists(outfilename_train):
