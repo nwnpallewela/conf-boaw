@@ -1,6 +1,6 @@
 #!/bin/python
 # python2
-# Prepare the files for emotion recognition with EmoDB
+# Prepare the files for emotion recognition with IEMOCAP
 #  -Convert wav to 16 bits (openSMILE cannot read 32bit wave files)
 #  -Split the data into a speaker-independent training (6 subjects: 11,12,13,14,15,16) and test partition (4 subjects: 03,08,09,10)
 #  -Generate a labels file for both partitions
@@ -8,33 +8,27 @@ import pandas as pd
 import os
 import librosa
 import soundfile as sf
-import noisereduce as nr
+# import noisereduce as nr
 
-folder_audio_emodb = "iemo_wav/"  # MODIFY this path to the folder with the iemocap audio files
-folder_audio_train = "iemo_trainx_nr/"  # The audio files in the training partition converted to 16 bits are stored here
-folder_audio_test  = "iemo_testx_nr/"   # The audio files in the test partition converted to 16 bits are stored here
-temp = "temp/"
-labelsfilename_train = "iemo_c_75xnr_labels_train.csv"
+folder_audio_emodb = "../data/iemo_wav/"  # MODIFY this path to the folder with the iemocap audio files
+folder_audio_train = "../data/iemo_trainx/"  # The audio files in the training partition converted to 16 bits are stored here
+folder_audio_test  = "../data/iemo_testx/"   # The audio files in the test partition converted to 16 bits are stored here
+temp = "../data/temp/"
+labelsfilename_train = "iemo_c_75_labels_train.csv"
 # labelsfilename_train = "iemo_s_labels_train.csv"
-labelsfilename_test  = "iemo_c_75xnr_labels_test.csv"
+labelsfilename_test  = "iemo_c_75_labels_test.csv"
 # labelsfilename_test  = "iemo_s_labels_test.csv"
 
 
-confidence = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\examples\\mmdatasdk_examples\\full_examples\\final_g_emotion_df.csv')
-df = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\iemocap\\Preprocessing\\df-iemocap\\df_iemocap_1.csv')
-df1 = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\iemocap\\Preprocessing\\df-iemocap\\df_iemocap_2.csv')
-df2 = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\iemocap\\Preprocessing\\df-iemocap\\df_iemocap_3.csv')
-df3 = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\iemocap\\Preprocessing\\df-iemocap\\df_iemocap_4.csv')
-df4 = pd.read_csv(
-    'C:\\Users\\npallewela\\PycharmProjects\\CMU-MultimodalSDK\\iemocap\\Preprocessing\\df-iemocap\\df_iemocap_5.csv')
+confidence = pd.read_csv('../data/final_g_emotion_df.csv')
+df = pd.read_csv('../data/iemocap_clip_labels/df_iemocap_1.csv')
+df1 = pd.read_csv('../data/iemocap_clip_labels/df_iemocap_2.csv')
+df2 = pd.read_csv('../data/iemocap_clip_labels/df_iemocap_3.csv')
+df3 = pd.read_csv('../data/iemocap_clip_labels/df_iemocap_4.csv')
+df4 = pd.read_csv('../data/iemocap_clip_labels/df_iemocap_5.csv')
 
 final_df = pd.concat([df, df1, df2, df3, df4], ignore_index=True)
-final_df.to_csv("all_c_75xnr_labels_from_iemocap.csv")
+final_df.to_csv("../data/all_c_75_labels_from_iemocap.csv")
 if not os.path.exists(folder_audio_train):
     os.mkdir(folder_audio_train)
 if not os.path.exists(folder_audio_test):
@@ -100,8 +94,8 @@ for fn in os.listdir(folder_audio_emodb):
             continue
     temp_file_name = temp + fn
     y, sr = sf.read(infilename)
-    y_reduced_noise = nr.reduce_noise(y=y, sr=sr)
-    sf.write(temp_file_name, y_reduced_noise, sr)
+    # y_reduced_noise = nr.reduce_noise(y=y, sr=sr)
+    sf.write(temp_file_name, y, sr)
 
     if (int(fn[3:5]) < 5) and max_val >= 0.75 and (label != 'x' or label != 's' or label != 'i' or label != 'd'):  # training partition
 
