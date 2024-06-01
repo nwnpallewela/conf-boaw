@@ -1,0 +1,5 @@
+## Generating BOAW codebook
+java -Xmx16G -jar audio-features/bin/openXBOW.jar -i audio-features/output/iemo_75_audio_llds_train.csv -o audio-features/output/iemo_75_xbow_train.arff -l audio-features/data/iemo_c_75_labels_train.csv -B audio-features/output/codebook_75 -standardizeInput -log -idf -size 1000 -a 5 -attributes nt1[65]2[65]
+
+## Generating BOAW for test data
+java -Xmx15G -jar audio-features/bin/openXBOW.jar -i audio-features/output/iemo_75_audio_llds_test.csv -o audio-features/output/iemo_75_xbow_test.arff -l audio-features/data/iemo_c_75_labels_test.csv -b audio-features/output/codebook_75 -attributes nt1[65]2[65]
