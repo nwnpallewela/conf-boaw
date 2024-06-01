@@ -14,9 +14,9 @@ folder_audio_emodb = "../data/iemo_wav/"  # MODIFY this path to the folder with 
 folder_audio_train = "../data/iemo_trainx/"  # The audio files in the training partition converted to 16 bits are stored here
 folder_audio_test  = "../data/iemo_testx/"   # The audio files in the test partition converted to 16 bits are stored here
 temp = "../data/temp/"
-labelsfilename_train = "iemo_c_75_labels_train.csv"
+labelsfilename_train = "../data/iemo_c_75_labels_train.csv"
 # labelsfilename_train = "iemo_s_labels_train.csv"
-labelsfilename_test  = "iemo_c_75_labels_test.csv"
+labelsfilename_test  = "../data/iemo_c_75_labels_test.csv"
 # labelsfilename_test  = "iemo_s_labels_test.csv"
 
 
