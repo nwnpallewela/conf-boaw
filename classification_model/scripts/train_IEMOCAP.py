@@ -100,8 +100,8 @@ def get_train_valid_sampler(trainset, valid=0.1):
     return SubsetRandomSampler(idx[split:]), SubsetRandomSampler(idx[:split])
 
 
-def get_IEMOCAP_loaders(path, batch_size=32, valid=0.1, num_workers=0, pin_memory=False):
-    trainset = IEMOCAPDataset(path=path)
+def get_IEMOCAP_loaders(path, batch_size=32, valid=0.1, num_workers=0, pin_memory=False, fold=0):
+    trainset = IEMOCAPDataset(path=path,fold=fold)
     train_sampler, valid_sampler = get_train_valid_sampler(trainset, valid)
     train_loader = DataLoader(trainset,
                               batch_size=batch_size,
@@ -116,7 +116,7 @@ def get_IEMOCAP_loaders(path, batch_size=32, valid=0.1, num_workers=0, pin_memor
                               num_workers=num_workers,
                               pin_memory=pin_memory)
 
-    testset = IEMOCAPDataset(path=path, train=False)
+    testset = IEMOCAPDataset(path=path, train=False, fold=fold)
     test_loader = DataLoader(testset,
                              batch_size=batch_size,
                              collate_fn=testset.collate_fn,
@@ -232,7 +232,7 @@ if __name__ == '__main__':
     # n_classes  = 6
     cuda = args.cuda
     n_epochs = args.epochs
-
+    fold = 3
     D_m = 2000
     D_g = 500
     D_p = 500
@@ -270,7 +270,7 @@ if __name__ == '__main__':
         get_IEMOCAP_loaders('../data/IEMOCAP_features_raw.pkl',
                             valid=0.0,
                             batch_size=batch_size,
-                            num_workers=2)
+                            num_workers=2, fold=fold)
 
     best_loss, best_label, best_pred, best_mask, best_train_last_layer, best_test_last_layer = None, None, None, None, None, None
 

@@ -27,8 +27,8 @@ def adjust_label(param):
 
 class IEMOCAPDataset(Dataset):
 
-    def __init__(self, path, train=True):
-        test_keys_array = ['Ses02M_script02_2', 'Ses02M_script02_1', 'Ses01M_impro02', 'Ses01F_impro05',
+    def __init__(self, path, train=True, fold=0):
+        test_keys_array_fold_0 = ['Ses02M_script02_2', 'Ses02M_script02_1', 'Ses01M_impro02', 'Ses01F_impro05',
                            'Ses03M_script03_2', 'Ses03F_script01_1', 'Ses02M_impro01', 'Ses03M_impro05a',
                            'Ses04F_script03_1', 'Ses05M_impro06', 'Ses05M_script01_2', 'Ses02M_impro08',
                            'Ses04M_script01_3', 'Ses04M_script01_2', 'Ses04F_script01_2', 'Ses03F_impro03',
@@ -36,6 +36,70 @@ class IEMOCAPDataset(Dataset):
                            'Ses03F_impro07', 'Ses02M_script01_2', 'Ses02M_impro03', 'Ses02M_script03_2',
                            'Ses02F_impro05', 'Ses04M_impro08', 'Ses05F_impro02', 'Ses05M_script03_2']
 
+        test_keys_array_fold_1 = ['Ses01M_script02_2', 'Ses01F_script03_2', 'Ses01M_script01_1', 'Ses01F_impro02',
+                                  'Ses01F_impro01',
+                                  'Ses01F_impro05', 'Ses01M_impro06', 'Ses01F_script01_1', 'Ses01F_script03_1',
+                                  'Ses01M_impro03',
+                                  'Ses01F_script01_3', 'Ses01F_impro07', 'Ses01M_impro07', 'Ses01F_script02_1',
+                                  'Ses01M_impro05',
+                                  'Ses01M_script03_2', 'Ses01M_impro02', 'Ses01F_script02_2', 'Ses01M_impro04',
+                                  'Ses01F_impro03',
+                                  'Ses01M_script02_1', 'Ses01F_impro06', 'Ses01M_script03_1', 'Ses01M_script01_3',
+                                  'Ses01F_impro04',
+                                  'Ses01M_impro01', 'Ses01F_script01_2', 'Ses01M_script01_2']
+
+        test_keys_array_fold_2 = ['Ses02M_impro06', 'Ses02M_impro04', 'Ses02M_script01_3', 'Ses02M_impro02',
+                                  'Ses02M_script03_1',
+                                  'Ses02F_impro07', 'Ses02M_impro03', 'Ses02M_impro08', 'Ses02F_impro03',
+                                  'Ses02F_impro08', 'Ses02M_script01_1',
+                                  'Ses02F_script01_1', 'Ses02F_impro05', 'Ses02F_script02_2', 'Ses02M_impro01',
+                                  'Ses02F_script03_1',
+                                  'Ses02F_impro01', 'Ses02M_impro05', 'Ses02F_script01_2', 'Ses02M_script03_2',
+                                  'Ses02F_impro04',
+                                  'Ses02F_impro06', 'Ses02F_script01_3', 'Ses02F_script02_1', 'Ses02F_impro02',
+                                  'Ses02M_script02_1',
+                                  'Ses02F_script03_2', 'Ses02M_script01_2', 'Ses02M_script02_2', 'Ses02M_impro07']
+
+        test_keys_array_fold_3 = ['Ses03M_impro04', 'Ses03F_impro06', 'Ses03F_script03_1', 'Ses03M_script01_3',
+                                  'Ses03M_script03_1', 'Ses03F_impro07'
+            , 'Ses03M_impro03', 'Ses03M_script03_2', 'Ses03M_impro06', 'Ses03F_impro03', 'Ses03M_script02_1',
+                                  'Ses03M_impro08a',
+                                  'Ses03F_impro08', 'Ses03F_impro04', 'Ses03M_script02_2', 'Ses03F_script02_2',
+                                  'Ses03F_script01_2', 'Ses03F_script01_3',
+                                  'Ses03M_impro05b', 'Ses03F_impro05', 'Ses03F_impro02', 'Ses03M_impro05a',
+                                  'Ses03F_script02_1',
+                                  'Ses03F_script03_2', 'Ses03F_script01_1', 'Ses03M_impro07', 'Ses03M_script01_2',
+                                  'Ses03F_impro01', 'Ses03M_script01_1', 'Ses03M_impro02', 'Ses03M_impro01',
+                                  'Ses03M_impro08b']
+
+        test_keys_array_fold_4 = ['Ses04F_impro08', 'Ses04F_script02_2', 'Ses04F_script01_3', 'Ses04M_impro07',
+                                  'Ses04F_impro05',
+                                  'Ses04M_script03_2', 'Ses04M_script01_3', 'Ses04M_impro08', 'Ses04M_impro04',
+                                  'Ses04M_script03_1',
+                                  'Ses04F_script03_1', 'Ses04M_impro02', 'Ses04F_impro02', 'Ses04F_script01_2',
+                                  'Ses04F_impro01',
+                                  'Ses04F_script02_1', 'Ses04M_impro01', 'Ses04F_script03_2', 'Ses04F_impro04',
+                                  'Ses04F_impro03',
+                                  'Ses04M_script02_1', 'Ses04F_impro06', 'Ses04M_impro06', 'Ses04M_script02_2',
+                                  'Ses04F_script01_1',
+                                  'Ses04F_impro07', 'Ses04M_script01_1', 'Ses04M_impro05', 'Ses04M_impro03',
+                                  'Ses04M_script01_2']
+
+        test_keys_array_fold_5 = ['Ses05M_impro06', 'Ses05F_script02_1', 'Ses05M_script01_1b', 'Ses05F_impro08',
+                                  'Ses05M_impro03',
+                                  'Ses05F_script01_3', 'Ses05F_impro01', 'Ses05M_script03_1', 'Ses05F_script01_2',
+                                  'Ses05M_script01_1',
+                                  'Ses05F_impro04', 'Ses05M_impro04', 'Ses05M_script02_2', 'Ses05F_script02_2',
+                                  'Ses05F_script01_1',
+                                  'Ses05M_impro02', 'Ses05M_impro01', 'Ses05F_script03_1', 'Ses05M_script01_3',
+                                  'Ses05F_impro05',
+                                  'Ses05M_script02_1', 'Ses05F_impro03', 'Ses05M_script03_2', 'Ses05M_impro05',
+                                  'Ses05F_impro07',
+                                  'Ses05M_impro08', 'Ses05M_script01_2', 'Ses05M_impro07', 'Ses05F_impro06',
+                                  'Ses05F_script03_2',
+                                  'Ses05F_impro02']
+        fold_array = [test_keys_array_fold_0,test_keys_array_fold_1,test_keys_array_fold_2,test_keys_array_fold_3,test_keys_array_fold_4,test_keys_array_fold_5]
+        test_keys_array = fold_array[fold]
         self.videoIDs, self.videoSpeakers, self.videoLabels, self.videoText, \
         self.videoAudio, self.videoVisual, self.videoSentence, self.trainVid, \
         self.testVid = pickle.load(open(path, 'rb'), encoding='latin1')
