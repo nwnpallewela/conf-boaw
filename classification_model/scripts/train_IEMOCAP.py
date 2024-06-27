@@ -205,7 +205,7 @@ if __name__ == '__main__':
                         help='dropout rate')
     parser.add_argument('--batch-size', type=int, default=8, metavar='BS',
                         help='batch size')
-    parser.add_argument('--epochs', type=int, default=30, metavar='E',
+    parser.add_argument('--epochs', type=int, default=50, metavar='E',
                         help='number of epochs')
     parser.add_argument('--class-weight', action='store_true', default=True,
                         help='class weight')
@@ -232,7 +232,7 @@ if __name__ == '__main__':
     # n_classes  = 6
     cuda = args.cuda
     n_epochs = args.epochs
-    fold = 3
+    fold = 0
     D_m = 2000
     D_g = 500
     D_p = 500
